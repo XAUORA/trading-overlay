@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>P&L Overlay</title>
+<style>
+  body {
+    margin: 0;
+    background: transparent;
+    font-family: Arial, sans-serif;
+  }
+
+  #pl-box {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.6);
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.5;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+
+  #pl {
+    color: #00FF00; /* hijau kalau profit */
+  }
+
+  #balance {
+    color: #FFFF00; /* kuning */
+  }
+</style>
+</head>
+<body>
+<div id="pl-box">
+  <div><strong>Deposit:</strong> <span id="deposit">$500.00</span></div>
+  <div><strong>P&L:</strong> <span id="pl">0.00</span></div>
+  <div><strong>Balance:</strong> <span id="balance">$500.00</span></div>
+</div>
+
+<script>
+  // Data manual
+  let data = {
+    deposit: 500, // modal awal
+    pl: 0         // P&L awal, bisa diubah manual
+  };
+
+  function updateOverlay(d) {
+    // Tampilkan deposit pakai $
+    document.getElementById('deposit').textContent = `$${d.deposit.toFixed(2)}`;
+
+    // Update P&L
+    const plSpan = document.getElementById('pl');
+    plSpan.textContent = d.pl.toFixed(2);
+    if(d.pl >= 0){
+      plSpan.style.color = "#00FF00"; // hijau kalau profit
+    } else {
+      plSpan.style.color = "#FF0000"; // merah kalau rug
