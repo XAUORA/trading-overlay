@@ -52,14 +52,10 @@
     // Tampilkan deposit pakai $
     document.getElementById('deposit').textContent = `$${d.deposit.toFixed(2)}`;
 
-    // Update P&L
+    // Update P&L dengan + untuk profit dan - otomatis untuk rugi
     const plSpan = document.getElementById('pl');
-    plSpan.textContent = d.pl.toFixed(2);
-    if(d.pl >= 0){
-      plSpan.style.color = "#00FF00"; // hijau kalau profit
-    } else {
-      plSpan.style.color = "#FF0000"; // merah kalau rugi
-    }
+    plSpan.textContent = (d.pl >= 0 ? '+' : '') + d.pl.toFixed(2);
+    plSpan.style.color = d.pl >= 0 ? "#00FF00" : "#FF0000";
 
     // Hitung balance otomatis
     const balance = d.deposit + d.pl;
@@ -74,5 +70,6 @@
 </script>
 </body>
 </html>
+
 
 
