@@ -16,12 +16,13 @@
     right: 20px;
     padding: 10px 15px;
     border-radius: 8px;
-    background: rgba(0,0,0,0.6);
-    color: 2px solid #FFFFFF;
+    background: rgba(128,128,128,0.6); /* abu-abu transparan */
+    border: 2px solid #FFFFFF;         /* border putih tipis */
+    color: #FFFFFF;                    /* teks putih */
     font-size: 20px;
     font-weight: bold;
     line-height: 1.5;
-    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
   }
 
   #pl {
@@ -44,7 +45,7 @@
   // Data manual
   let data = {
     deposit: 500, // modal awal
-    pl: 0         // P&L awal, bisa diubah manual
+    pl: 0         // P&L awal
   };
 
   function updateOverlay(d) {
@@ -57,6 +58,19 @@
     if(d.pl >= 0){
       plSpan.style.color = "#00FF00"; // hijau kalau profit
     } else {
-      plSpan.style.color = "#FF0000"; // merah kalau rug
+      plSpan.style.color = "#FF0000"; // merah kalau rugi
+    }
 
+    // Hitung balance otomatis
+    const balance = d.deposit + d.pl;
+    document.getElementById('balance').textContent = `$${balance.toFixed(2)}`;
+  }
 
+  // Update overlay sekali saat load
+  updateOverlay(data);
+
+  // Cara ubah P&L manual:
+  // data.pl = 100; updateOverlay(data);
+</script>
+</body>
+</html>
